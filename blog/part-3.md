@@ -15,6 +15,7 @@ Example:
 ### Drawing on Images:
 
 **What it does:** Adds visual elements (shapes and text) to an image
+
 **Why it matters:** Useful for annotation, visualization, or debugging during processing
 
 ```
