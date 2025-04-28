@@ -29,4 +29,13 @@ cv2.putText(image, "OpenCV", (50, 350), cv2.FONT_HERSHEY_SIMPLEX, 1, (255, 255, 
 cv2.imwrite("output_drawn.jpg", image)
 ```
 
-**_Display the before and after on the image that has been edited_**
+<div style="display: flex; justify-content: space-around;">
+    <div>
+        <p><strong>Before:</strong></p>
+        <img src="../images/landscape_unchanged.jpg" alt="Unchanged Image">
+    </div>
+    <div>
+        <p><strong>After:</strong></p>
+        <img src="../images/landscape_changed.png" alt="Changed Image">
+    </div>
+</div>
