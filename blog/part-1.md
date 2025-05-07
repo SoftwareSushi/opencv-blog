@@ -248,7 +248,7 @@ create_mpl_figure(30,10, [image, cropped_image])
     </div>
 </div>
 
-### Image_Pyramids:
+### Image Pyramids:
 
 **What it does:** Image Pyramids upsample or downsample a given image.
 
