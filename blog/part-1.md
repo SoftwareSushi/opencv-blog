@@ -39,8 +39,8 @@ def create_mpl_figure(w,h,images):
 - Rotation
 - Horizontal Flipping
 - Vertical Flipping
-- Cropping
-- Zooming
+- Cropping / Zooming
+- Image Pyramids
 
 ## Use Cases
 
