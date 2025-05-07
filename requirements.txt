@@ -1,2 +1,7 @@
 opencv-python
 numpy
+matplotlib
+urllib.request
+base64
+requests
+IPython.display
