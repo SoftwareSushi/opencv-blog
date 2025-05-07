@@ -276,3 +276,7 @@ create_mpl_figure(30,10, [downscaled_image, image, upscaled_image])
         <img src="../images/image_pyramids_comparison.png" alt="Original & edited image comparison">
     </div>
 </div>
+
+## Conclusion
+
+In the next blog, we will be covering a number of other techniques, ranging from image arithmetic concerning brightness and contrast, as well as bitwise operations.
