@@ -1,16 +1,16 @@
-# OpenCV Blog Materials
+# OpenCV Blog
 
 ## Overview
 
-## Features
-
-## Installation
+This blog series covers a variety of different image manipulation techniques contained within the opencv-python library.
 
 ## Usage
 
+This repo contains three different formats of the same blog series. These three formats, markdown, .ipynb on github, and .ipynb on Google Colab are identical in terms of content, but the notebooks allow the reader to experiment with the various techniques themselves, whereas the markdown is good for those who would rather just read the content.
+
 ## Technologies Used
 
-## Configuration
+The main technology used will be the opencv-python library, but both numpy and matplotlib will be used occasionally. Awareness of how to use these libraries will not be necessary unless otherwise stated.
 
 ## License
 
