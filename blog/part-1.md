@@ -235,7 +235,7 @@ image = cv2.cvtColor(bgr_image, cv2.COLOR_BGR2RGB)
 # Get image shape (width = 550, height = 880, channel = 3)
 print(image.shape)
 
-# Crop image (image[row,column])
+# Crop image (image[min_y:max_y, min_x:max_x])
 cropped_image = image[220:500, 650:1000]
 
 # Creation of the MatPlotLib figure for comparison of images
