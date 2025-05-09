@@ -15,7 +15,7 @@ from google.colab.patches import cv2_imshow
 
 ```
 # Collecting the sample image
-image_url = "https://raw.githubusercontent.com/SoftwareSushi/marketing-resources/main/images/Windows%20XP%20Background.jpg"
+image_url = "https://raw.githubusercontent.com/SoftwareSushi/marketing-resources/main/images/opencv_blog/part_1/Parrot-on-branch.png"
 resp = urllib.request.urlopen(image_url)
 image_bytes = np.asarray(bytearray(resp.read()), dtype=np.uint8)
 ```
@@ -65,10 +65,10 @@ image = cv2.cvtColor(bgr_image, cv2.COLOR_BGR2RGB)
 image_edit = cv2.cvtColor(bgr_image, cv2.COLOR_BGR2RGB)
 
 # Image Transformations
-cv2.line(image_edit, (50, 50), (200, 50), (0, 255, 0), 2)
-cv2.rectangle(image_edit, (50, 100), (200, 200), (255, 0, 0), 3)
-cv2.circle(image_edit, (150, 300), 40, (0, 0, 255), -1)
-cv2.putText(image_edit, "OpenCV", (50, 350), cv2.FONT_HERSHEY_SIMPLEX, 1, (255, 255, 255), 2)
+cv2.line(image_edit, (550, 870), (1000, 820), (0, 255, 0), 2)
+cv2.rectangle(image_edit, (650, 225), (1000, 500), (255, 255, 255), 3)
+cv2.circle(image_edit, (307, 550), 60, (0, 0, 255), -1)
+cv2.putText(image_edit, "OpenCV", (650, 200), cv2.FONT_HERSHEY_SIMPLEX, 3, (0, 255, 255), 2)
 
 # Creation of the MatPlotLib figure for comparison of images
 create_mpl_figure(30,10, [image, image_edit])
@@ -99,7 +99,7 @@ image = cv2.cvtColor(bgr_image, cv2.COLOR_BGR2RGB)
 height, width = image.shape[:2]
 
 # Creating the resized image
-resized_image = cv2.resize(image, (0,0), fx=0.1, fy=0.1, interpolation=cv2.INTER_LINEAR)
+resized_image = cv2.resize(image, (60,30), fx=0.1, fy=0.1, interpolation=cv2.INTER_LINEAR)
 
 # Creation of the MatPlotLib figure for comparison of images
 create_mpl_figure(30,10, [image, resized_image])
@@ -236,7 +236,7 @@ image = cv2.cvtColor(bgr_image, cv2.COLOR_BGR2RGB)
 print(image.shape)
 
 # Crop image (image[row,column])
-cropped_image = image[50:180, 100:300]
+cropped_image = image[220:500, 650:1000]
 
 # Creation of the MatPlotLib figure for comparison of images
 create_mpl_figure(30,10, [image, cropped_image])
