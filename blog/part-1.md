@@ -9,8 +9,6 @@ import cv2
 import numpy as np
 import urllib.request
 import matplotlib.pyplot as plt
-
-from google.colab.patches import cv2_imshow
 ```
 
 ```
@@ -23,10 +21,10 @@ image_bytes = np.asarray(bytearray(resp.read()), dtype=np.uint8)
 ### Utils
 
 ```
-def create_mpl_figure(w,h,images):
+def create_mpl_figure(w,h,images,axis='off'):
     plt.figure(figsize=[w,h])
     for i, image in enumerate(images):
-        plt.subplot(1,len(images),i+1); plt.imshow(image); plt.title(f'Image {i+1}'); plt.axis('off');
+        plt.subplot(1,len(images),i+1); plt.imshow(image); plt.title(f'Image {i+1}'); plt.axis(axis);
 ```
 
 ## List of Techniques
@@ -76,7 +74,7 @@ create_mpl_figure(30,10, [image, image_edit])
 
 <div style="display: flex; justify-content: space-around;">
     <div>
-        <img src="../images/drawing_on_images_comparison.png" alt="Original & edited image comparison">
+        <img src="../images/part_1/drawing_on_images_comparison.png" alt="Original & edited image comparison">
     </div>
 </div>
 
@@ -107,7 +105,7 @@ create_mpl_figure(30,10, [image, resized_image])
 
 <div style="display: flex; justify-content: space-around;">
     <div>
-        <img src="../images/resizing_comparison.png" alt="Original & edited image comparison">
+        <img src="../images/part_1/resizing_comparison.png" alt="Original & edited image comparison">
     </div>
 </div>
 
@@ -148,7 +146,7 @@ create_mpl_figure(30,10, [image, translated_image])
 
 <div style="display: flex; justify-content: space-around;">
     <div>
-        <img src="../images/translation_comparison.png" alt="Original & edited image comparison">
+        <img src="../images/part_1/translation_comparison.png" alt="Original & edited image comparison">
     </div>
 </div>
 
@@ -185,7 +183,7 @@ create_mpl_figure(30,10, [image, rotated_image, rotated_image_2])
 
 <div style="display: flex; justify-content: space-around;">
     <div>
-        <img src="../images/rotation_comparison.png" alt="Original & edited image comparison">
+        <img src="../images/part_1/rotation_comparison.png" alt="Original & edited image comparison">
     </div>
 </div>
 
@@ -213,7 +211,7 @@ create_mpl_figure(30,10, [image, flipped_image])
 
 <div style="display: flex; justify-content: space-around;">
     <div>
-        <img src="../images/flipping_comparison.png" alt="Original & edited image comparison">
+        <img src="../images/part_1/flipping_comparison.png" alt="Original & edited image comparison">
     </div>
 </div>
 
@@ -244,7 +242,7 @@ create_mpl_figure(30,10, [image, cropped_image])
 
 <div style="display: flex; justify-content: space-around;">
     <div>
-        <img src="../images/cropping_zooming_comparison.png" alt="Original & edited image comparison">
+        <img src="../images/part_1/cropping_zooming_comparison.png" alt="Original & edited image comparison">
     </div>
 </div>
 
@@ -273,7 +271,7 @@ create_mpl_figure(30,10, [downscaled_image, image, upscaled_image])
 
 <div style="display: flex; justify-content: space-around;">
     <div>
-        <img src="../images/image_pyramids_comparison.png" alt="Original & edited image comparison">
+        <img src="../images/part_1/image_pyramids_comparison.png" alt="Original & edited image comparison">
     </div>
 </div>
 
