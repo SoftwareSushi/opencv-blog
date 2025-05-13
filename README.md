@@ -12,6 +12,8 @@ This repo contains three different formats of the same blog series. These three 
 
 Part 1: https://colab.research.google.com/drive/1LFmv21T7OTrBzm3PyGWtuMcPMcTpNeFD?authuser=1#scrollTo=SI1USyrBQ7z5
 
+Part 2: https://colab.research.google.com/drive/1k2CZisZoOahASrXNka1tIaDfgXoI2wQt?authuser=1
+
 ## Technologies Used
 
 The main technology used will be the opencv-python library, but both numpy and matplotlib will be used occasionally. Awareness of how to use these libraries will not be necessary unless otherwise stated.
