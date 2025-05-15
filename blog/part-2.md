@@ -33,10 +33,11 @@ image_bytes_4 = np.asarray(bytearray(resp_4.read()), dtype=np.uint8)
 ### Utils
 
 ```
-def create_mpl_figure(w,h,images,axis='off'):
+# Function for the creation of flexible MatPlotLib figures
+def create_mpl_figure(w,h,images,titles="Image",axis="off"):
     plt.figure(figsize=[w,h])
     for i, image in enumerate(images):
-        plt.subplot(1,len(images),i+1); plt.imshow(image); plt.title(f'Image {i+1}'); plt.axis(axis);
+        plt.subplot(1,len(images),i+1); plt.imshow(image); plt.title(titles[i]); plt.axis(axis);
 ```
 
 ## List of Techniques
@@ -70,17 +71,17 @@ bgr_image = cv2.imdecode(image_bytes, cv2.IMREAD_COLOR)
 bgr_image2 = cv2.imdecode(image_bytes_2, cv2.IMREAD_COLOR)
 
 # Color conversion to ensure proper display of images
-image = cv2.cvtColor(bgr_image, cv2.COLOR_BGR2RGB)
-image2 = cv2.cvtColor(bgr_image2, cv2.COLOR_BGR2RGB)
+image_sample_1 = cv2.cvtColor(bgr_image, cv2.COLOR_BGR2RGB)
+image_sample_2 = cv2.cvtColor(bgr_image2, cv2.COLOR_BGR2RGB)
 
 # Image Addition and Subtraction
-image_brighter = cv2.add(image, 100)
-image_darker = cv2.subtract(image, 100)
-image_blend = cv2.addWeighted(image, 0.5, image2, 0.5, 0)
+image_brighter = cv2.add(image_sample_1, 100)
+image_darker = cv2.subtract(image_sample_1, 100)
+image_blend = cv2.addWeighted(image_sample_1, 0.5, image_sample_2, 0.5, 0)
 
 # Creation of the MatPlotLib figure for comparison of images
-create_mpl_figure(30,10, [image_darker, image, image_brighter])
-create_mpl_figure(30,10, [image, image_blend])
+create_mpl_figure(30,10, [image_darker, image_sample_1, image_brighter], ['Darker', 'Original', 'Brighter'])
+create_mpl_figure(30,10, [image_sample_1, image_blend, image_sample_2], ['Sample 1', 'Blended', 'Sample 2'])
 ```
 
 <div style="display: flex; justify-content: space-around;">
@@ -112,7 +113,7 @@ image_higher_contrast = cv2.multiply(image, 2.5)
 image_lower_contrast = cv2.multiply(image, 0.5)
 
 # Creation of the MatPlotLib figure for comparison of images
-create_mpl_figure(30,10, [image_lower_contrast, image, image_higher_contrast])
+create_mpl_figure(30,10, [image_lower_contrast, image, image_higher_contrast], ['Lower Contrast', 'Original', 'Higher Contrast'])
 ```
 
 <div style="display: flex; justify-content: space-around;">
@@ -138,7 +139,7 @@ image_2 = cv2.imdecode(image_bytes_4, cv2.IMREAD_COLOR)
 bitwise_and = cv2.bitwise_and(image, image_2)
 
 # Creation of the MatPlotLib figure for comparison of images
-create_mpl_figure(30, 10, [image, image_2, bitwise_and], 'on')
+create_mpl_figure(30, 10, [image, bitwise_and, image_2 ], ['Sample 1', 'Bitwise AND result of both Samples', 'Sample 2'],'on')
 ```
 
 <div style="display: flex; justify-content: space-around;">
@@ -164,7 +165,7 @@ image_2 = cv2.imdecode(image_bytes_4, cv2.IMREAD_COLOR)
 bitwise_or = cv2.bitwise_or(image, image_2)
 
 # Creation of the MatPlotLib figure for comparison of images
-create_mpl_figure(30, 10, [image, image_2, bitwise_or], 'on')
+create_mpl_figure(30, 10, [image, bitwise_or, image_2], ['Sample 1', 'Bitwise OR result of both Samples', 'Sample 2'], 'on')
 ```
 
 <div style="display: flex; justify-content: space-around;">
@@ -189,7 +190,7 @@ image = cv2.imdecode(image_bytes_3, cv2.IMREAD_COLOR)
 bitwise_not = cv2.bitwise_not(image)
 
 # Creation of the MatPlotLib figure for comparison of images
-create_mpl_figure(30, 10, [image, bitwise_not])
+create_mpl_figure(30, 10, [image, bitwise_not], ['Sample', 'Bitwise NOT result of the Sample'], 'on')
 ```
 
 <div style="display: flex; justify-content: space-around;">
@@ -215,7 +216,7 @@ image_2 = cv2.imdecode(image_bytes_4, cv2.IMREAD_COLOR)
 bitwise_xor = cv2.bitwise_xor(image, image_2)
 
 # Creation of the MatPlotLib figure for comparison of images
-create_mpl_figure(30, 10, [image, image_2, bitwise_xor], 'on')
+create_mpl_figure(30, 10, [image, bitwise_xor, image_2], ['Sample 1', 'Bitwise XOR result of both Samples', 'Sample 2'], 'on')
 ```
 
 <div style="display: flex; justify-content: space-around;">
@@ -264,7 +265,7 @@ background = cv2.bitwise_and(image_foreground, image_foreground, mask=mask_inv)
 masked_image = cv2.bitwise_or(foreground, background)
 
 # Creation of the MatPlotLib figure for comparison of images
-create_mpl_figure(30, 10, [image_foreground, image_background_resized, masked_image])
+create_mpl_figure(30, 10, [image_foreground, masked_image, image_background_resized], ['Foreground', 'Masked Image', 'Background'])
 ```
 
 <div style="display: flex; justify-content: space-around;">
@@ -294,7 +295,7 @@ r,g,b = cv2.split(image)
 merged_channels = cv2.merge([r,g,b])
 
 # Creation of the MatPlotLib figure for comparison of images
-create_mpl_figure(30, 10, [image, r, g, b, merged_channels])
+create_mpl_figure(30, 10, [image, r, g, b, merged_channels], ['Original', 'Red Channel', 'Green Channel', 'Blue Channel', 'Merged Channels'])
 ```
 
 <div style="display: flex; justify-content: space-around;">

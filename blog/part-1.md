@@ -21,10 +21,11 @@ image_bytes = np.asarray(bytearray(resp.read()), dtype=np.uint8)
 ### Utils
 
 ```
-def create_mpl_figure(w,h,images,axis='off'):
+# Function for the creation of flexible MatPlotLib figures
+def create_mpl_figure(w,h,images,titles="Image",axis="off"):
     plt.figure(figsize=[w,h])
     for i, image in enumerate(images):
-        plt.subplot(1,len(images),i+1); plt.imshow(image); plt.title(f'Image {i+1}'); plt.axis(axis);
+        plt.subplot(1,len(images),i+1); plt.imshow(image); plt.title(titles[i]); plt.axis(axis);
 ```
 
 ## List of Techniques
@@ -69,7 +70,7 @@ cv2.circle(image_edit, (307, 550), 60, (0, 0, 255), -1)
 cv2.putText(image_edit, "OpenCV", (650, 200), cv2.FONT_HERSHEY_SIMPLEX, 3, (0, 255, 255), 2)
 
 # Creation of the MatPlotLib figure for comparison of images
-create_mpl_figure(30,10, [image, image_edit])
+create_mpl_figure(30,10, [image, image_edit], ["Original", "Edited"])
 ```
 
 <div style="display: flex; justify-content: space-around;">
@@ -100,7 +101,7 @@ height, width = image.shape[:2]
 resized_image = cv2.resize(image, (60,30), fx=0.1, fy=0.1, interpolation=cv2.INTER_LINEAR)
 
 # Creation of the MatPlotLib figure for comparison of images
-create_mpl_figure(30,10, [image, resized_image])
+create_mpl_figure(30,10, [image, resized_image], ["Original", "Resized"])
 ```
 
 <div style="display: flex; justify-content: space-around;">
@@ -141,7 +142,7 @@ translation_matrix = np.array([
 translated_image = cv2.warpAffine(src=image, M=translation_matrix, dsize=(width, height))
 
 # Creation of the MatPlotLib figure for comparison of images
-create_mpl_figure(30,10, [image, translated_image])
+create_mpl_figure(30,10, [image, translated_image], ["Original", "Translated"])
 ```
 
 <div style="display: flex; justify-content: space-around;">
@@ -178,7 +179,7 @@ rotated_image = cv2.warpAffine(src=image, M=rotate_matrix, dsize=(width, height)
 rotated_image_2 = cv2.rotate(image, cv2.ROTATE_180) # Also try ROTATE_90_CLOCKWISE, ROTATE_90_COUNTERCLOCKWISE
 
 # Creation of the MatPlotLib figure for comparison of images
-create_mpl_figure(30,10, [image, rotated_image, rotated_image_2])
+create_mpl_figure(30,10, [image, rotated_image, rotated_image_2], ["Original", "Rotated 45 Degrees", "Rotated 180 Degrees"])
 ```
 
 <div style="display: flex; justify-content: space-around;">
@@ -206,7 +207,7 @@ image = cv2.cvtColor(bgr_image, cv2.COLOR_BGR2RGB)
 flipped_image = cv2.flip(image, -1)
 
 # Creation of the MatPlotLib figure for comparison of images
-create_mpl_figure(30,10, [image, flipped_image])
+create_mpl_figure(30,10, [image, flipped_image], ["Original", "Flipped"])
 ```
 
 <div style="display: flex; justify-content: space-around;">
@@ -230,14 +231,14 @@ bgr_image = cv2.imdecode(image_bytes, cv2.IMREAD_COLOR)
 # Color conversion to ensure proper display of images
 image = cv2.cvtColor(bgr_image, cv2.COLOR_BGR2RGB)
 
-# Get image shape (width = 550, height = 880, channel = 3)
+# Get image shape (width = 1024, height = 1536, channel = 3)
 print(image.shape)
 
 # Crop image (image[min_y:max_y, min_x:max_x])
 cropped_image = image[220:500, 650:1000]
 
 # Creation of the MatPlotLib figure for comparison of images
-create_mpl_figure(30,10, [image, cropped_image])
+create_mpl_figure(30,10, [image, cropped_image], ["Original", "Cropped"])
 ```
 
 <div style="display: flex; justify-content: space-around;">
@@ -262,11 +263,13 @@ bgr_image = cv2.imdecode(image_bytes, cv2.IMREAD_COLOR)
 image = cv2.cvtColor(bgr_image, cv2.COLOR_BGR2RGB)
 
 # Upscaling and downscaling the image
-upscaled_image = cv2.pyrUp(image)
-downscaled_image = cv2.pyrDown(image)
+downscaled_image_1 = cv2.pyrDown(image)
+downscaled_image_2 = cv2.pyrDown(downscaled_image_1)
+downscaled_image = cv2.pyrDown(downscaled_image_2)
+upscaled_image = cv2.pyrUp(downscaled_image)
 
 # Creation of the MatPlotLib figure for comparison of images
-create_mpl_figure(30,10, [downscaled_image, image, upscaled_image])
+create_mpl_figure(30,10, [downscaled_image, image, upscaled_image], ["Downscaled Image", "Original", "Upscaled Image created from downscaled_image"])
 ```
 
 <div style="display: flex; justify-content: space-around;">
