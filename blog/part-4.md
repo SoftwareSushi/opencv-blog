@@ -1,6 +1,6 @@
-# Fundamentals of Image Manipulation with OpenCV
+# Mastering Thresholding and Image Segmentation
 
-OpenCV is the most common library for utilizing computer vision. In this first, we will be covering the foundational image manipulation techniques found within OpenCV that will both enable basic image manipulation, as well as serve as components of more advanced techniques that will be covered in later blogs within this series.
+In this blog, we go over the most advanced techniques yet covered in this series. From simple thresholding to the watershed algorithm, we will cover all sorts of image segmenting techniques that have numerous applications in a variety of different fields.
 
 ### Imports & Sample Images
 
@@ -9,50 +9,65 @@ import cv2
 import numpy as np
 import urllib.request
 import matplotlib.pyplot as plt
-
-from google.colab.patches import cv2_imshow
 ```
 
 ```
 # Collecting the sample image
-image_url = "https://raw.githubusercontent.com/SoftwareSushi/marketing-resources/main/images/opencv_blog/part_1/Parrot-on-branch.png"
+image_url = "https://raw.githubusercontent.com/SoftwareSushi/marketing-resources/main/images/opencv_blog/part_4/Parrot_on_snowmobile.png"
 resp = urllib.request.urlopen(image_url)
 image_bytes = np.asarray(bytearray(resp.read()), dtype=np.uint8)
+
+image_url_watershed = "https://raw.githubusercontent.com/SoftwareSushi/marketing-resources/main/images/opencv_blog/part_4/Watershed_sample.png"
+resp = urllib.request.urlopen(image_url_watershed)
+image_bytes_watershed = np.asarray(bytearray(resp.read()), dtype=np.uint8)
+
+image_url_ccl = "https://raw.githubusercontent.com/SoftwareSushi/marketing-resources/main/images/opencv_blog/part_4/Parrot_simple.png"
+resp = urllib.request.urlopen(image_url_ccl)
+image_bytes_ccl = np.asarray(bytearray(resp.read()), dtype=np.uint8)
 ```
 
 ### Utils
 
 ```
-def create_mpl_figure(w,h,images):
+# Function for the creation of flexible MatPlotLib figures
+def create_mpl_figure(w,h,images,titles="Image",axis="off",color_maps=None):
     plt.figure(figsize=[w,h])
+
     for i, image in enumerate(images):
-        plt.subplot(1,len(images),i+1); plt.imshow(image); plt.title(f'Image {i+1}'); plt.axis('off');
+        plt.subplot(1,len(images),i+1);
+
+        if color_maps is None:
+            plt.imshow(image);
+        elif len(color_maps) > 1:
+            plt.imshow(image, cmap=f"{color_maps[i]}");
+        else:
+            plt.imshow(image, cmap=f"{color_maps[0]}")
+
+        plt.title(titles[i]);
+        plt.axis(axis);
 ```
 
 ## List of Techniques
 
-- Draw rectangle
-- Draw circle
-- Draw text
-- Resizing
-- Translation
-- Rotation
-- Horizontal Flipping
-- Vertical Flipping
-- Cropping / Zooming
-- Image Pyramids
+- Simple Thresholding
+- Image Binarization
+- Adaptive Thresholding
+- Otsu's Binarization
+- Grabcut Algorithm
+- Watershed Algorithm
+- Connected Components Labeling
 
 ## Use Cases
 
-In this blog, we will be covering a variety of basic image manipulation techniques, all of which have a number of very useful implementations. Whether it be using rectangels, circles, resizing or cropping in order to track objects in images or videos, or using a combination of cropping, rotation, flipping in order to train a machine learning model to better recognize a given subject, each of these techniques has a variety of different real world applications which makes them useful.
+Whether it be presence sensing for 3D printers using simple thresholding, warehouse shelf label reading using adaptive thresholding, or automatic pill counters using otsu's binarization, each of the image segmentation techniques we will cover in this blog have a variety of different use cases that are quite common.
 
 ## Techniques
 
-### Drawing on Images:
+### Simple Thresholding
 
-**What it does:** Adds visual elements (shapes and text) to an image
+**What it does:** Simple thresholding alters the target image by taking a user-inputted threshold and evaluating every pixel on the image by that value. If the evaluated pixel is less than the threshold, it will be set to 0, and if greater than, it will be set to the maximum intensity.
 
-**Why it matters:** Drawing on images is useful for annotation, visualization, or debugging during processing.
+**Why it matters:** Simple thresholding allows users to isolate objects in images & videos, do basic edge detection, simplify images for more efficient processing, and as we have already seen in a previous blog, it is quite useful for the creation of masks on images.
 
 **The Code & Output**
 
@@ -60,140 +75,107 @@ In this blog, we will be covering a variety of basic image manipulation techniqu
 # Reading the sample image
 bgr_image = cv2.imdecode(image_bytes, cv2.IMREAD_COLOR)
 
-# Color conversion to ensure proper display of images
+# Color space conversions
 image = cv2.cvtColor(bgr_image, cv2.COLOR_BGR2RGB)
-image_edit = cv2.cvtColor(bgr_image, cv2.COLOR_BGR2RGB)
 
-# Image Transformations
-cv2.line(image_edit, (550, 870), (1000, 820), (0, 255, 0), 2)
-cv2.rectangle(image_edit, (650, 225), (1000, 500), (255, 255, 255), 3)
-cv2.circle(image_edit, (307, 550), 60, (0, 0, 255), -1)
-cv2.putText(image_edit, "OpenCV", (650, 200), cv2.FONT_HERSHEY_SIMPLEX, 3, (0, 255, 255), 2)
+# Splitting the channels for thresholding an individual color
+r,g,b = cv2.split(image)
+
+# Simple Thresholding
+ret, thresh_g = cv2.threshold(g, 255, 255, cv2.THRESH_BINARY)
+
+green_thresholded = cv2.merge([r,thresh_g,b])
 
 # Creation of the MatPlotLib figure for comparison of images
-create_mpl_figure(30,10, [image, image_edit])
+create_mpl_figure(30, 10, [image, green_thresholded], ["Original", "Green Thresholded"])
 ```
 
 <div style="display: flex; justify-content: space-around;">
     <div>
-        <img src="../images/part_1/drawing_on_images_comparison.png" alt="Original & edited image comparison">
+        <img src="../images/part_4/simple_thresholding_comparison.png" alt="Original & edited image comparison">
     </div>
 </div>
 
-### Resizing:
+### Image Binarization
 
-**What it does:** Resizing scales an image according to desired size of an image, scale factors fx and fy, and an interpolation method.
+**What it does:** Image binarization is a technique by which a given image is converted from its original coloration to a binary intensity set based upon a given threshold.
 
-**Why it matters:** Resizing, and more broadly image scaling as a whole can be very useful when it comes to image processing in the process of training a machine learning model. By reducing the number of pixels in an image, it can reduce the amount of time spent training for a given model by presenting it with less complex, albeit less accurate training data.
+**Why it matters:** Image binarization has a number of differetn applications, but two of the most common would be in feature & edge detection, as well as in the reduction of data sizes, so that training and image consumption of a given model that is being trained is much, much faster, as the evaluation of the image is only happening on one channel, rather than on three or more.
 
 **The Code & Output**
 
 ```
 # Reading the sample image
-bgr_image = cv2.imdecode(image_bytes, cv2.IMREAD_COLOR)
+image = cv2.imdecode(image_bytes, cv2.IMREAD_GRAYSCALE)
 
-# Color conversion to ensure proper display of images
-image = cv2.cvtColor(bgr_image, cv2.COLOR_BGR2RGB)
-
-# Getting the dimensions of the image
-height, width = image.shape[:2]
-
-# Creating the resized image
-resized_image = cv2.resize(image, (60,30), fx=0.1, fy=0.1, interpolation=cv2.INTER_LINEAR)
+# Image Binarization
+ret, binarized_image = cv2.threshold(image, 100, 255, cv2.THRESH_BINARY)
 
 # Creation of the MatPlotLib figure for comparison of images
-create_mpl_figure(30,10, [image, resized_image])
+create_mpl_figure(30, 10, [image, binarized_image], ["Grayscale Original", "Binarized"], "off", ["gray"])
 ```
 
 <div style="display: flex; justify-content: space-around;">
     <div>
-        <img src="../images/part_1/resizing_comparison.png" alt="Original & edited image comparison">
+        <img src="../images/part_4/image_binarization_comparison.png" alt="Original & edited image comparison">
     </div>
 </div>
 
-### Translation:
+### Adaptive Thresholding
 
-**What it does:** Shifts a given image by a specified number of pixels along the x and y axes. These pixel shifts can be represented by the following notations: tx & ty
+**What it does:** Adaptive Thresholding, rather than applying a global threshold to the entire image like in simple thresholding, it applies a dynamic threshold that is dependent upon the neighborhood of a given pixel.
 
-**Why it matters:** Image translations are often used for object tracking, image alignment, and augmentation of data used for machine learning.
+**Why it matters:** Adaptive thresholding is very effective for the processing of documents for instance. Where a global threshold might be able to make some of the content of the scanned document clearer in one part of the image, it may end up obscuring detail if the lighting changes at points in the image. This is a situation where a technique like adaptive thresholding shines, as it is dynamic, and can produce consistent results regardless of original pixel intensity.
 
 **The Code & Output**
 
 ```
 # Reading the sample image
-bgr_image = cv2.imdecode(image_bytes, cv2.IMREAD_COLOR)
+image = cv2.imdecode(image_bytes, cv2.IMREAD_GRAYSCALE)
 
-# Color conversion to ensure proper display of images
-image = cv2.cvtColor(bgr_image, cv2.COLOR_BGR2RGB)
-
-# Image Translation
-# Getting the dimensions of the image
-height, width = image.shape[:2]
-
-# Create translation values
-tx, ty = width / 4, height / 4
-
-# Create translation matrix
-translation_matrix = np.array([
-    [1, 0, tx],
-    [0, 1, ty]
-], dtype=np.float32)
-
-# Apply matrix to image
-translated_image = cv2.warpAffine(src=image, M=translation_matrix, dsize=(width, height))
+# Adaptive Thresholding
+thresh = cv2.adaptiveThreshold(image, 255, cv2.ADAPTIVE_THRESH_MEAN_C, cv2.THRESH_BINARY, 25, 1)
 
 # Creation of the MatPlotLib figure for comparison of images
-create_mpl_figure(30,10, [image, translated_image])
+create_mpl_figure(30, 10, [image, thresh], ["Original", "Adaptive Thresholding"], "off", ["gray"])
 ```
 
 <div style="display: flex; justify-content: space-around;">
     <div>
-        <img src="../images/part_1/translation_comparison.png" alt="Original & edited image comparison">
+        <img src="../images/part_4/adaptive_thresholding_comparison.png" alt="Original & edited image comparison">
     </div>
 </div>
 
-### Rotation:
+### Otsu's Binarization
 
-**What it does:** Allows users to rotate a given image about a certain point in the image by a specified number of degrees using a rotation matrix, or by the center of the image in 90 degree increments by using the getRotationMatrix2D() & warpAffine() methods or the rotate() method accordingly.
+**What it does:** Otsu's Binarization serves a similar purpose to simple thresholding, but where in simple thresholding you must determine the threshold yourself, otsu's binarization determines the optimal threshold automatically. In this technique, the threshold passed is arbitrary, as it is overwritten automatically.
 
-**Why it matters:** Rotation can be used to automate rotation of important physical documents submitted electronically, increasing accuracy of other methods for recognizing text and images on scanned / photographically captured documents.
+**Why it matters:** Otsu's binarization and its ability to find the optimal threshold value based upon the image's histogram is very effective for document analysis, even in some less than optimal lighting conditions. Additionally, it is often used within medical imaging, as well as license plate recognition.
 
 **The Code & Output**
 
 ```
 # Reading the sample image
-bgr_image = cv2.imdecode(image_bytes, cv2.IMREAD_COLOR)
+image = cv2.imdecode(image_bytes, cv2.IMREAD_GRAYSCALE)
 
-# Color conversion to ensure proper display of images
-image = cv2.cvtColor(bgr_image, cv2.COLOR_BGR2RGB)
-
-# Specific Degree Rotation
-# Getting the dimensions of the image and the centerpoint
-height, width = image.shape[:2]
-center = (width/2, height/2)
-
-# Creating rotation matrix and applying it to the image, retaining the same dimensions
-rotate_matrix = cv2.getRotationMatrix2D(center=center, angle=45, scale=1)
-rotated_image = cv2.warpAffine(src=image, M=rotate_matrix, dsize=(width, height))
-
-# 90-Degree Increment Rotation
-rotated_image_2 = cv2.rotate(image, cv2.ROTATE_180) # Also try ROTATE_90_CLOCKWISE, ROTATE_90_COUNTERCLOCKWISE
+# Otsu's Binarization
+ret, otsu_image = cv2.threshold(image, 0, 255, cv2.THRESH_BINARY + cv2.THRESH_OTSU)
 
 # Creation of the MatPlotLib figure for comparison of images
-create_mpl_figure(30,10, [image, rotated_image, rotated_image_2])
+create_mpl_figure(30, 10, [image, otsu_image], ["Original", "Otsu's Binarization"], "off", ["gray"])
 ```
 
 <div style="display: flex; justify-content: space-around;">
     <div>
-        <img src="../images/part_1/rotation_comparison.png" alt="Original & edited image comparison">
+        <img src="../images/part_4/otsus_binarization_comparison.png" alt="Original & edited image comparison">
     </div>
 </div>
 
-### Flipping:
+### Grabcut Algorithm
 
-**What it does:** Flips a given image about either the x axis, the y axis, or the x and y axis using the according flip codes 0, 1, and -1.
+**What it does:** Grabcut Algorithm is an image segmentation technique that separates the foreground from the background. It requires user interaction, typically in the form of a user drawing a rectangle around the given subject.
 
-**Why it matters:** Flipping images can create more reliable machine learning models by providing them with new data samples of existing data on which they have been trained. It can be also used to correct orientation of camera feeds for surveillance purposes, among many other uses.
+**Why it matters:** The Grabcut algorithm is first and foremost useful for foreground isolation from the background. It is not the fastest technique, to be sure, and while it may occasionally have artifacts surrounding your subject (as can be seen in the example), it is still a very useful technique for image segmentation.
 
 **The Code & Output**
 
@@ -204,76 +186,185 @@ bgr_image = cv2.imdecode(image_bytes, cv2.IMREAD_COLOR)
 # Color conversion to ensure proper display of images
 image = cv2.cvtColor(bgr_image, cv2.COLOR_BGR2RGB)
 
-# Flipping the sample image
-flipped_image = cv2.flip(image, -1)
+# Image Preprocessing
+mask = np.zeros(image.shape[:2], np.uint8)
+
+bgdModel = np.zeros((1, 65), np.float64)
+fgdModel = np.zeros((1, 65), np.float64)
+
+rectangle = (400, 250, 500, 450)
+
+# Grabcut Algorithm
+cv2.grabCut(image, mask, rectangle, bgdModel, fgdModel, 5, cv2.GC_INIT_WITH_RECT)
+
+mask2 = np.where((mask == 2)|(mask == 0), 0, 1).astype('uint8')
+
+image_segmented = image * mask2[:, :, np.newaxis]
 
 # Creation of the MatPlotLib figure for comparison of images
-create_mpl_figure(30,10, [image, flipped_image])
+create_mpl_figure(30, 10, [image, image_segmented], ["Original", "Grabcut"], "on")
 ```
 
 <div style="display: flex; justify-content: space-around;">
     <div>
-        <img src="../images/part_1/flipping_comparison.png" alt="Original & edited image comparison">
+        <img src="../images/part_4/grabcut_algorithm_comparison.png" alt="Original & edited image comparison">
     </div>
 </div>
 
-### Cropping / Zooming:
+### Connected Components Labeling
 
-**What it does:** Displays a certain section of an image, defined by slicing a given image.
+**What it does:** Connected components labeling, as the name suggests, seeks to determine the connectivity of blobs (distinct regions within an image with regard to color or intensity) within a given image.
 
-**Why it matters:** Cropping can be very useful for object detection and recognition as a pre-processing step by cropping out the relevant portion of an image, allowing faster and more accurate recognition. Additionally, it can be used as a step of image of segmentation, and other techniques for image analysis.
+**Why it matters:** Connected components labeling is useful for the counting of objects within an image, the identification and tracking of those same objects, as well as in other applications such as defect detection in manufacturing.
 
 **The Code & Output**
 
 ```
 # Reading the sample image
-bgr_image = cv2.imdecode(image_bytes, cv2.IMREAD_COLOR)
+image = cv2.imdecode(image_bytes_ccl, cv2.IMREAD_GRAYSCALE)
 
-# Color conversion to ensure proper display of images
-image = cv2.cvtColor(bgr_image, cv2.COLOR_BGR2RGB)
+# Image Preprocessing
+ret, thresh = cv2.threshold(image, 0, 255, cv2.THRESH_BINARY | cv2.THRESH_OTSU)
 
-# Get image shape (width = 550, height = 880, channel = 3)
-print(image.shape)
+# Connected Components Labeling
+connectivity = 4
 
-# Crop image (image[min_y:max_y, min_x:max_x])
-cropped_image = image[220:500, 650:1000]
+output = cv2.connectedComponentsWithStats(thresh, connectivity, cv2.CV_32S)
+(numLabels, labels, stats, centroids) = output
+
+images = []
+
+images.append(image)
+
+for i in range(0, numLabels):
+    # Printing the component information as each is evaluated
+    # The first component is ALWAYS the background, so we add a suffix to indicate this
+    suffix = " (background)" if i == 0 else ""
+
+    text = f"examining component {i + 1}/{numLabels}{suffix}"
+
+    print(f"[INFO] {text}")
+
+    # Extracting the component information
+    x = stats[i, cv2.CC_STAT_LEFT]
+    y = stats[i, cv2.CC_STAT_TOP]
+    w = stats[i, cv2.CC_STAT_WIDTH]
+    h = stats[i, cv2.CC_STAT_HEIGHT]
+    area = stats[i, cv2.CC_STAT_AREA]
+    (cX, cY) = centroids[i]
+
+    # Creating a copy of the original image on which to draw the component information
+    output = image.copy()
+    cv2.rectangle(output, (x, y), (x + w, y + h), (0, 255, 0), 3)
+    cv2.circle(output, (int(cX), int(cY)), 4, (0, 0, 255), -1)
+
+    # Creating the mask for each component
+    componentMask = (labels == i).astype("uint8") * 255
+
+    # Appending the images to the list for display
+    images.append(output)
+    images.append(componentMask)
 
 # Creation of the MatPlotLib figure for comparison of images
-create_mpl_figure(30,10, [image, cropped_image])
+create_mpl_figure(30, 10, images, ["Original", "Background Component", "Background Mask", "Parrot Component", "Parrot Mask"], "off", ["gray"])
 ```
 
 <div style="display: flex; justify-content: space-around;">
     <div>
-        <img src="../images/part_1/cropping_zooming_comparison.png" alt="Original & edited image comparison">
+        <img src="../images/part_4/connected_components_labeling_comparison.png" alt="Original & edited image comparison">
     </div>
 </div>
 
-### Image Pyramids:
+### Watershed Algorithm
 
-**What it does:** Image Pyramids upsample or downsample a given image.
+**What it does:** The watershed algorithm treats each evaluated image like a topographic map, wherein peaks (the foreground objects to be segmented) are given the highest pixel intensity, and valleys (the background) are given the lowest pixel intensity.
 
-**Why it matters:** Upsampling can be used to make smaller images more visible by making them larger, allowing them to be more accurately processed while increasing their size, whereas downsampling can decrease image sizes, enabling more images to be stored, as well as increasing the performance of image processing.
+**Why it matters:** The watershed algorithm finds consistent use in medical fields, specifically in MRIs and CAT scans, as well as in other applications like traffic analysis and object recognition. It is a very flexible technique that is quite useful once you get the hang of it.
 
 **The Code & Output**
 
 ```
 # Reading the sample image
-bgr_image = cv2.imdecode(image_bytes, cv2.IMREAD_COLOR)
+original_img = cv2.imdecode(image_bytes_watershed, cv2.IMREAD_COLOR)
+img = cv2.imdecode(image_bytes_watershed, cv2.IMREAD_COLOR)
+g_image = cv2.imdecode(image_bytes_watershed, cv2.IMREAD_GRAYSCALE)
 
-# Color conversion to ensure proper display of images
-image = cv2.cvtColor(bgr_image, cv2.COLOR_BGR2RGB)
+# Image pre-processing
 
-# Upscaling and downscaling the image
-upscaled_image = cv2.pyrUp(image)
-downscaled_image = cv2.pyrDown(image)
+# Thresholding the image
+ret, thresh = cv2.threshold(g_image, 0, 255, cv2.THRESH_BINARY_INV + cv2.THRESH_OTSU)
+
+# Removing the noise
+kernel = cv2.getStructuringElement(cv2.MORPH_RECT, (3, 3))
+refined = cv2.morphologyEx(thresh, cv2.MORPH_OPEN, kernel, iterations=2)
+
+# Background area
+sure_bg = cv2.dilate(refined, kernel, iterations=3)
+
+# Distance transform
+dist = cv2.distanceTransform(refined, cv2.DIST_L2, 5)
+
+# Foreground Area
+ret, sure_fg = cv2.threshold(dist, 0.5 * dist.max(), 255, cv2.THRESH_BINARY)
+sure_fg = sure_fg.astype(np.uint8)
+
+# Unknown area
+unknown = cv2.subtract(sure_bg, sure_fg)
+
+# Labeling
+# Sure Foreground
+ret, markers = cv2.connectedComponents(sure_fg)
+
+# Add one to all labels so that background is not 0, but 1
+markers += 1
+
+# Mark the region of unknown with zero
+markers[unknown == 255] = 0
+
+# Watershed Algorithm
+markers = cv2.watershed(img, markers)
+
+labels = np.unique(markers)
+
+coins = []
+for label in labels[2:]:
+
+# Create a binary image in which only the area of the label is in the foreground
+# And the rest of the image is in the background
+    target = np.where(markers == label, 255, 0).astype(np.uint8)
+
+  # Perform contour extraction on the created binary image
+    contours, hierarchy = cv2.findContours(
+        target, cv2.RETR_EXTERNAL, cv2.CHAIN_APPROX_SIMPLE
+    )
+    coins.append(contours[0])
+
+# Draw the outline
+watershed_img = cv2.drawContours(img, coins, -1, color=(0, 23, 223), thickness=2)
+
+# Color conversion for proper display
+o_img = cv2.cvtColor(original_img, cv2.COLOR_BGR2RGB)
+w_img = cv2.cvtColor(watershed_img, cv2.COLOR_BGR2RGB)
 
 # Creation of the MatPlotLib figure for comparison of images
-create_mpl_figure(30,10, [downscaled_image, image, upscaled_image])
+plt.figure(figsize=[30,10])
+
+plt.subplot(1, 2, 1)
+plt.imshow(o_img, vmin=0, vmax=255)
+plt.title("Original")
+plt.axis('off')
+
+plt.subplot(1, 2, 2)
+plt.imshow(w_img, vmin=0, vmax=255)
+plt.title("Watershed Algorithm")
+plt.axis('off')
+
+plt.show()
 ```
 
 <div style="display: flex; justify-content: space-around;">
     <div>
-        <img src="../images/part_1/image_pyramids_comparison.png" alt="Original & edited image comparison">
+        <img src="../images/part_4/watershed_algorithm_comparison.png" alt="Original & edited image comparison">
     </div>
 </div>
 
