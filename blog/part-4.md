@@ -277,9 +277,11 @@ create_mpl_figure(30, 10, images, ["Original", "Background Component", "Backgrou
 
 ### Watershed Algorithm
 
-**What it does:** The watershed algorithm treats each evaluated image like a topographic map, wherein peaks (the foreground objects to be segmented) are given the highest pixel intensity, and valleys (the background) are given the lowest pixel intensity.
+**What it does:** The watershed algorithm treats each image evaluated as a topographical map where areas of high intensity denote peaks, and those of low intensity denote valleys. Assuming one were to punch holes at the bottom of each valley, and the image started to flood from these locations equally, each valley would begin to fill with different colored water (labels). When two of these bodies of water are getting ready to merge, you would will draw a damn. After the whole image is flooded, the damns would delineate your object boundaries.
 
-**Why it matters:** The watershed algorithm finds consistent use in medical fields, specifically in MRIs and CAT scans, as well as in other applications like traffic analysis and object recognition. It is a very flexible technique that is quite useful once you get the hang of it.
+Consider it in two steps. In step 1, you create hints (sure background and foreground). In step 2, you feed those hints to Watershed, which makes sense of these hints, defining precise boundaries.
+
+**Why it matters:** The watershed algorithm finds consistent use in medical fields, specifically in MRIs and CAT scans, as well as in other applications like traffic analysis and object recognition. It is a very flexible object detection technique that is quite flexible, once one understands how to implement it.
 
 **The Code & Output**
 
@@ -291,34 +293,35 @@ g_image = cv2.imdecode(image_bytes_watershed, cv2.IMREAD_GRAYSCALE)
 
 # Image pre-processing
 
-# Thresholding the image
+# Thresholding the image, converting it to an intensity space
 ret, thresh = cv2.threshold(g_image, 0, 255, cv2.THRESH_BINARY_INV + cv2.THRESH_OTSU)
 
-# Removing the noise
+# Cleaning up any artifacting in the image
 kernel = cv2.getStructuringElement(cv2.MORPH_RECT, (3, 3))
 refined = cv2.morphologyEx(thresh, cv2.MORPH_OPEN, kernel, iterations=2)
 
-# Background area
+# Our sure background. This will inform the algorithm where not to place markers (water)
 sure_bg = cv2.dilate(refined, kernel, iterations=3)
 
-# Distance transform
+# Distance transform. For every foreground pixel, this computes euclidean distance to nearest background pixel.
 dist = cv2.distanceTransform(refined, cv2.DIST_L2, 5)
 
-# Foreground Area
+# Foreground Area. Shrinks the foreground objects to create sure internal markers of each valley.
 ret, sure_fg = cv2.threshold(dist, 0.5 * dist.max(), 255, cv2.THRESH_BINARY)
 sure_fg = sure_fg.astype(np.uint8)
 
-# Unknown area
+# Unknown area. This are makes up pixels that are background AND not part of the shrunken foreground markers.
+# They are ambiguous, and marking them unknown allows the watershed algorithm to decide on what they are later.
 unknown = cv2.subtract(sure_bg, sure_fg)
 
 # Labeling
-# Sure Foreground
+# Scans the sure foreground, assigning unique integers to each connected blob in the binary mask.
 ret, markers = cv2.connectedComponents(sure_fg)
 
-# Add one to all labels so that background is not 0, but 1
+# connectedComponents starts at 0 (background), and we already have one, so increment each marker by 1
 markers += 1
 
-# Mark the region of unknown with zero
+# Mark the region of unknown with zero to be considered as valleys during the implementation of the algorithm.
 markers[unknown == 255] = 0
 
 # Watershed Algorithm
@@ -326,7 +329,7 @@ markers = cv2.watershed(img, markers)
 
 labels = np.unique(markers)
 
-coins = []
+parrots = []
 for label in labels[2:]:
 
 # Create a binary image in which only the area of the label is in the foreground
@@ -337,10 +340,10 @@ for label in labels[2:]:
     contours, hierarchy = cv2.findContours(
         target, cv2.RETR_EXTERNAL, cv2.CHAIN_APPROX_SIMPLE
     )
-    coins.append(contours[0])
+    parrots.append(contours[0])
 
 # Draw the outline
-watershed_img = cv2.drawContours(img, coins, -1, color=(0, 23, 223), thickness=2)
+watershed_img = cv2.drawContours(img, parrots, -1, color=(0, 23, 223), thickness=2)
 
 # Color conversion for proper display
 o_img = cv2.cvtColor(original_img, cv2.COLOR_BGR2RGB)
