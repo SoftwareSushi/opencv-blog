@@ -343,7 +343,7 @@ for label in labels[2:]:
     parrots.append(contours[0])
 
 # Draw the outline
-watershed_img = cv2.drawContours(img, parrots, -1, color=(0, 23, 223), thickness=2)
+watershed_img = cv2.drawContours(img, parrots, -1, color=(0, 254, 0), thickness=2)
 
 # Color conversion for proper display
 o_img = cv2.cvtColor(original_img, cv2.COLOR_BGR2RGB)
