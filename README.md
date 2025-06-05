@@ -18,6 +18,8 @@ Part 3:https://colab.research.google.com/drive/1j-Lb7rbZDNeMdyD0umyAlbZJYhTsFPZS
 
 Part 4:https://colab.research.google.com/drive/1NaME41cwexk0r00v_k3eUziMeeFGeWpg?usp=sharing
 
+Part 5:https://colab.research.google.com/drive/1yA9ilzuOPu9MfCD0ORQRyCeaU8335DVu?usp=sharing
+
 ## Technologies Used
 
 The main technology used will be the opencv-python library, but both numpy and matplotlib will be used occasionally. Awareness of how to use these libraries will not be necessary unless otherwise stated.
