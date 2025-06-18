@@ -75,7 +75,7 @@ create_mpl_figure(30,10, [image, image_edit], ["Original", "Edited"])
 
 <div style="display: flex; justify-content: space-around;">
     <div>
-        <img src="../images/part_1/drawing_on_images_comparison.png" alt="Original & edited image comparison">
+        <img src="../../images/opencv_fundamentals/part_1/drawing_on_images_comparison.png" alt="Original & edited image comparison">
     </div>
 </div>
 
@@ -106,7 +106,7 @@ create_mpl_figure(30,10, [image, resized_image], ["Original", "Resized"])
 
 <div style="display: flex; justify-content: space-around;">
     <div>
-        <img src="../images/part_1/resizing_comparison.png" alt="Original & edited image comparison">
+        <img src="../../images/opencv_fundamentals/part_1/resizing_comparison.png" alt="Original & edited image comparison">
     </div>
 </div>
 
@@ -147,7 +147,7 @@ create_mpl_figure(30,10, [image, translated_image], ["Original", "Translated"])
 
 <div style="display: flex; justify-content: space-around;">
     <div>
-        <img src="../images/part_1/translation_comparison.png" alt="Original & edited image comparison">
+        <img src="../../images/opencv_fundamentals/part_1/translation_comparison.png" alt="Original & edited image comparison">
     </div>
 </div>
 
@@ -184,7 +184,7 @@ create_mpl_figure(30,10, [image, rotated_image, rotated_image_2], ["Original", "
 
 <div style="display: flex; justify-content: space-around;">
     <div>
-        <img src="../images/part_1/rotation_comparison.png" alt="Original & edited image comparison">
+        <img src="../../images/opencv_fundamentals/part_1/rotation_comparison.png" alt="Original & edited image comparison">
     </div>
 </div>
 
@@ -212,7 +212,7 @@ create_mpl_figure(30,10, [image, flipped_image], ["Original", "Flipped"])
 
 <div style="display: flex; justify-content: space-around;">
     <div>
-        <img src="../images/part_1/flipping_comparison.png" alt="Original & edited image comparison">
+        <img src="../../images/opencv_fundamentals/part_1/flipping_comparison.png" alt="Original & edited image comparison">
     </div>
 </div>
 
@@ -243,7 +243,7 @@ create_mpl_figure(30,10, [image, cropped_image], ["Original", "Cropped"])
 
 <div style="display: flex; justify-content: space-around;">
     <div>
-        <img src="../images/part_1/cropping_zooming_comparison.png" alt="Original & edited image comparison">
+        <img src="../../images/opencv_fundamentals/part_1/cropping_zooming_comparison.png" alt="Original & edited image comparison">
     </div>
 </div>
 
@@ -274,7 +274,7 @@ create_mpl_figure(30,10, [downscaled_image, image, upscaled_image], ["Downscaled
 
 <div style="display: flex; justify-content: space-around;">
     <div>
-        <img src="../images/part_1/image_pyramids_comparison.png" alt="Original & edited image comparison">
+        <img src="../../images/opencv_fundamentals/part_1/image_pyramids_comparison.png" alt="Original & edited image comparison">
     </div>
 </div>
 

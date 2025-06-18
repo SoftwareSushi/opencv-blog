@@ -88,7 +88,7 @@ create_mpl_figure(30, 10, [bgr_image, rgb_image, gray_image, hsv_image, hls_imag
 
 <div style="display: flex; justify-content: space-around;">
     <div>
-        <img src="../images/part_3/color_space_conversions_comparison.png" alt="Original & edited image comparison">
+        <img src="../../images/opencv_fundamentals/part_3/color_space_conversions_comparison.png" alt="Original & edited image comparison">
     </div>
 </div>
 
@@ -118,7 +118,7 @@ create_mpl_figure(30, 10, [image, mean_image], ["Original", "Mean Filtered"])
 
 <div style="display: flex; justify-content: space-around;">
     <div>
-        <img src="../images/part_3/mean_filtering_comparison.png" alt="Original & edited image comparison">
+        <img src="../../images/opencv_fundamentals/part_3/mean_filtering_comparison.png" alt="Original & edited image comparison">
     </div>
 </div>
 
@@ -151,7 +151,7 @@ create_mpl_figure(30, 10, [image, noisy_image, gaussian_image], ["Original", "Ga
 
 <div style="display: flex; justify-content: space-around;">
     <div>
-        <img src="../images/part_3/gaussian_filtering_comparison.png" alt="Original & edited image comparison">
+        <img src="../../images/opencv_fundamentals/part_3/gaussian_filtering_comparison.png" alt="Original & edited image comparison">
     </div>
 </div>
 
@@ -184,7 +184,7 @@ create_mpl_figure(30, 10, [image, noisy_image, median_image], ["Original", "Salt
 
 <div style="display: flex; justify-content: space-around;">
     <div>
-        <img src="../images/part_3/median_blurring_comparison.png" alt="Original & edited image comparison">
+        <img src="../../images/opencv_fundamentals/part_3/median_blurring_comparison.png" alt="Original & edited image comparison">
     </div>
 </div>
 
@@ -215,7 +215,7 @@ create_mpl_figure(30, 10, [image, noisy_image, bilateral_image], ["Original", "G
 
 <div style="display: flex; justify-content: space-around;">
     <div>
-        <img src="../images/part_3/bilateral_filtering_comparison.png" alt="Original & edited image comparison">
+        <img src="../../images/opencv_fundamentals/part_3/bilateral_filtering_comparison.png" alt="Original & edited image comparison">
     </div>
 </div>
 

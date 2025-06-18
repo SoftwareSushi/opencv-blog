@@ -147,7 +147,7 @@ display_image_gallery([img, sobel_x, sobel_y, sobel_xy], ["Original", "X Axis Ed
 
 <div style="display: flex; justify-content: space-around;">
     <div>
-        <img src="../images/part_5/sobel_edge_detection_comparison.png" alt="Original & edited image comparison">
+        <img src="../../images/opencv_fundamentals/part_5/sobel_edge_detection_comparison.png" alt="Original & edited image comparison">
     </div>
 </div>
 
@@ -179,7 +179,7 @@ display_image_gallery([img, laplacian_abs], ["Original", "Laplacian Edge Detecti
 
 <div style="display: flex; justify-content: space-around;">
     <div>
-        <img src="../images/part_5/laplacian_edge_detection_comparison.png" alt="Original & edited image comparison">
+        <img src="../../images/opencv_fundamentals/part_5/laplacian_edge_detection_comparison.png" alt="Original & edited image comparison">
     </div>
 </div>
 
@@ -213,7 +213,7 @@ display_image_gallery([img, edge_detection], ["Original", "Canny Edge Detection"
 
 <div style="display: flex; justify-content: space-around;">
     <div>
-        <img src="../images/part_5/canny_edge_detection_comparison.png" alt="Original & edited image comparison">
+        <img src="../../images/opencv_fundamentals/part_5/canny_edge_detection_comparison.png" alt="Original & edited image comparison">
     </div>
 </div>
 
@@ -249,7 +249,7 @@ display_image_gallery([img, img_copy], ["Original", "Countour Detection"], 400, 
 
 <div style="display: flex; justify-content: space-around;">
     <div>
-        <img src="../images/part_5/contour_detection_comparison.png" alt="Original & edited image comparison">
+        <img src="../../images/opencv_fundamentals/part_5/contour_detection_comparison.png" alt="Original & edited image comparison">
     </div>
 </div>
 
@@ -277,7 +277,7 @@ display_image_gallery([img, dilation], ["Original", "Dilation"], 400, "png")
 
 <div style="display: flex; justify-content: space-around;">
     <div>
-        <img src="../images/part_5/dilation_comparison.png" alt="Original & edited image comparison">
+        <img src="../../images/opencv_fundamentals/part_5/dilation_comparison.png" alt="Original & edited image comparison">
     </div>
 </div>
 
@@ -305,7 +305,7 @@ display_image_gallery([img, erosion], ["Original", "Erosion"], 400, "png")
 
 <div style="display: flex; justify-content: space-around;">
     <div>
-        <img src="../images/part_5/erosion_comparison.png" alt="Original & edited image comparison">
+        <img src="../../images/opencv_fundamentals/part_5/erosion_comparison.png" alt="Original & edited image comparison">
     </div>
 </div>
 
@@ -333,7 +333,7 @@ display_image_gallery([img, opening], ["Original", "Opening"], 400, "png")
 
 <div style="display: flex; justify-content: space-around;">
     <div>
-        <img src="../images/part_5/opening_comparison.png" alt="Original & edited image comparison">
+        <img src="../../images/opencv_fundamentals/part_5/opening_comparison.png" alt="Original & edited image comparison">
     </div>
 </div>
 
@@ -361,7 +361,7 @@ display_image_gallery([img, closing], ["Original", "Closing"], 400, "png")
 
 <div style="display: flex; justify-content: space-around;">
     <div>
-        <img src="../images/part_5/closing_comparison.png" alt="Original & edited image comparison">
+        <img src="../../images/opencv_fundamentals/part_5/closing_comparison.png" alt="Original & edited image comparison">
     </div>
 </div>
 
@@ -389,7 +389,7 @@ display_image_gallery([img, morph_gradient], ["Original", "Morphological Gradien
 
 <div style="display: flex; justify-content: space-around;">
     <div>
-        <img src="../images/part_5/morphological_gradient_comparison.png" alt="Original & edited image comparison">
+        <img src="../../images/opencv_fundamentals/part_5/morphological_gradient_comparison.png" alt="Original & edited image comparison">
     </div>
 </div>
 
@@ -424,7 +424,7 @@ display_image_gallery([gray_img, top_hat], ["Original", "Top Hat"], 400, "png")
 
 <div style="display: flex; justify-content: space-around;">
     <div>
-        <img src="../images/part_5/top_hat_comparison.png" alt="Original & edited image comparison">
+        <img src="../../images/opencv_fundamentals/part_5/top_hat_comparison.png" alt="Original & edited image comparison">
     </div>
 </div>
 
@@ -459,7 +459,7 @@ display_image_gallery([gray_img, black_hat], ["Original", "Black Hat"], 400, "pn
 
 <div style="display: flex; justify-content: space-around;">
     <div>
-        <img src="../images/part_5/black_hat_comparison.png" alt="Original & edited image comparison">
+        <img src="../../images/opencv_fundamentals/part_5/black_hat_comparison.png" alt="Original & edited image comparison">
     </div>
 </div>
 

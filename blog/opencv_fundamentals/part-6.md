@@ -149,7 +149,7 @@ create_mpl_figure(20, 10, [img, template, img_matched], [ "Original", "Template"
 
 <div style="display: flex; justify-content: space-around;">
     <div>
-        <img src="../images/part_6/template_matching_comparison.png" alt="Original & edited image comparison">
+        <img src="../../images/opencv_fundamentals/part_6/template_matching_comparison.png" alt="Original & edited image comparison">
     </div>
 </div>
 
@@ -195,7 +195,7 @@ create_mpl_figure(20, 10, [img, img_back], ["Original", "Fourier Transform"], co
 
 <div style="display: flex; justify-content: space-around;">
     <div>
-        <img src="../images/part_6/fourier_transform_comparison.png" alt="Original & edited image comparison">
+        <img src="../../images/opencv_fundamentals/part_6/fourier_transform_comparison.png" alt="Original & edited image comparison">
     </div>
 </div>
 
@@ -243,7 +243,7 @@ create_mpl_figure(20, 10, [img, edges, img_gray], ["Original", "Canny Edge Detec
 
 <div style="display: flex; justify-content: space-around;">
     <div>
-        <img src="../images/part_6/hough_line_transform_comparison.png" alt="Original & edited image comparison">
+        <img src="../../images/opencv_fundamentals/part_6/hough_line_transform_comparison.png" alt="Original & edited image comparison">
     </div>
 </div>
 
@@ -280,7 +280,7 @@ create_mpl_figure(20, 10, [img, blur, img_edited], ["Original", "Noise Reduction
 
 <div style="display: flex; justify-content: space-around;">
     <div>
-        <img src="../images/part_6/hough_circle_transform_comparison.png" alt="Original & edited image comparison">
+        <img src="../../images/opencv_fundamentals/part_6/hough_circle_transform_comparison.png" alt="Original & edited image comparison">
     </div>
 </div>
 
@@ -307,7 +307,7 @@ create_mpl_figure(20, 10, [img_gray, hist_eq], ["Original", "Histogram Equalizat
 
 <div style="display: flex; justify-content: space-around;">
     <div>
-        <img src="../images/part_6/histogram_equalization_comparison.png" alt="Original & edited image comparison">
+        <img src="../../images/opencv_fundamentals/part_6/histogram_equalization_comparison.png" alt="Original & edited image comparison">
     </div>
 </div>
 

@@ -86,10 +86,10 @@ create_mpl_figure(30,10, [image_sample_1, image_blend, image_sample_2], ['Sample
 
 <div style="display: flex; justify-content: space-around;">
     <div>
-        <img src="../images/part_2/image_addition_subtraction_comparison.png" alt="Original & edited image comparison">
+        <img src="../../images/opencv_fundamentals/part_2/image_addition_subtraction_comparison.png" alt="Original & edited image comparison">
     </div>
     <div>
-        <img src="../images/part_2/image_blending_comparison.png" alt="Original & edited image comparison">
+        <img src="../../images/opencv_fundamentals/part_2/image_blending_comparison.png" alt="Original & edited image comparison">
     </div>
 </div>
 
@@ -118,7 +118,7 @@ create_mpl_figure(30,10, [image_lower_contrast, image, image_higher_contrast], [
 
 <div style="display: flex; justify-content: space-around;">
     <div>
-        <img src="../images/part_2/image_multiplication_comparison.png" alt="Original & edited image comparison">
+        <img src="../../images/opencv_fundamentals/part_2/image_multiplication_comparison.png" alt="Original & edited image comparison">
     </div>
 </div>
 
@@ -144,7 +144,7 @@ create_mpl_figure(30, 10, [image, bitwise_and, image_2 ], ['Sample 1', 'Bitwise 
 
 <div style="display: flex; justify-content: space-around;">
     <div>
-        <img src="../images/part_2/bitwise_and_comparison.png" alt="Original & edited image comparison">
+        <img src="../../images/opencv_fundamentals/part_2/bitwise_and_comparison.png" alt="Original & edited image comparison">
     </div>
 </div>
 
@@ -170,7 +170,7 @@ create_mpl_figure(30, 10, [image, bitwise_or, image_2], ['Sample 1', 'Bitwise OR
 
 <div style="display: flex; justify-content: space-around;">
     <div>
-        <img src="../images/part_2/bitwise_or_comparison.png" alt="Original & edited image comparison">
+        <img src="../../images/opencv_fundamentals/part_2/bitwise_or_comparison.png" alt="Original & edited image comparison">
     </div>
 </div>
 
@@ -195,7 +195,7 @@ create_mpl_figure(30, 10, [image, bitwise_not], ['Sample', 'Bitwise NOT result o
 
 <div style="display: flex; justify-content: space-around;">
     <div>
-        <img src="../images/part_2/bitwise_not_comparison.png" alt="Original & edited image comparison">
+        <img src="../../images/opencv_fundamentals/part_2/bitwise_not_comparison.png" alt="Original & edited image comparison">
     </div>
 </div>
 
@@ -221,7 +221,7 @@ create_mpl_figure(30, 10, [image, bitwise_xor, image_2], ['Sample 1', 'Bitwise X
 
 <div style="display: flex; justify-content: space-around;">
     <div>
-        <img src="../images/part_2/bitwise_xor_comparison.png" alt="Original & edited image comparison">
+        <img src="../../images/opencv_fundamentals/part_2/bitwise_xor_comparison.png" alt="Original & edited image comparison">
     </div>
 </div>
 
@@ -270,7 +270,7 @@ create_mpl_figure(30, 10, [image_foreground, masked_image, image_background_resi
 
 <div style="display: flex; justify-content: space-around;">
     <div>
-        <img src="../images/part_2/masking_comparison.png" alt="Original & edited image comparison">
+        <img src="../../images/opencv_fundamentals/part_2/masking_comparison.png" alt="Original & edited image comparison">
     </div>
 </div>
 
@@ -300,7 +300,7 @@ create_mpl_figure(30, 10, [image, r, g, b, merged_channels], ['Original', 'Red C
 
 <div style="display: flex; justify-content: space-around;">
     <div>
-        <img src="../images/part_2/splitting_merging_color_channels_comparison.png" alt="Original & edited image comparison">
+        <img src="../../images/opencv_fundamentals/part_2/splitting_merging_color_channels_comparison.png" alt="Original & edited image comparison">
     </div>
 </div>
 

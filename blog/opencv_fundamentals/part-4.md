@@ -92,7 +92,7 @@ create_mpl_figure(30, 10, [image, green_thresholded], ["Original", "Green Thresh
 
 <div style="display: flex; justify-content: space-around;">
     <div>
-        <img src="../images/part_4/simple_thresholding_comparison.png" alt="Original & edited image comparison">
+        <img src="../../images/opencv_fundamentals/part_4/simple_thresholding_comparison.png" alt="Original & edited image comparison">
     </div>
 </div>
 
@@ -117,7 +117,7 @@ create_mpl_figure(30, 10, [image, binarized_image], ["Grayscale Original", "Bina
 
 <div style="display: flex; justify-content: space-around;">
     <div>
-        <img src="../images/part_4/image_binarization_comparison.png" alt="Original & edited image comparison">
+        <img src="../../images/opencv_fundamentals/part_4/image_binarization_comparison.png" alt="Original & edited image comparison">
     </div>
 </div>
 
@@ -142,7 +142,7 @@ create_mpl_figure(30, 10, [image, thresh], ["Original", "Adaptive Thresholding"]
 
 <div style="display: flex; justify-content: space-around;">
     <div>
-        <img src="../images/part_4/adaptive_thresholding_comparison.png" alt="Original & edited image comparison">
+        <img src="../../images/opencv_fundamentals/part_4/adaptive_thresholding_comparison.png" alt="Original & edited image comparison">
     </div>
 </div>
 
@@ -167,7 +167,7 @@ create_mpl_figure(30, 10, [image, otsu_image], ["Original", "Otsu's Binarization
 
 <div style="display: flex; justify-content: space-around;">
     <div>
-        <img src="../images/part_4/otsus_binarization_comparison.png" alt="Original & edited image comparison">
+        <img src="../../images/opencv_fundamentals/part_4/otsus_binarization_comparison.png" alt="Original & edited image comparison">
     </div>
 </div>
 
@@ -207,7 +207,7 @@ create_mpl_figure(30, 10, [image, image_segmented], ["Original", "Grabcut"], "on
 
 <div style="display: flex; justify-content: space-around;">
     <div>
-        <img src="../images/part_4/grabcut_algorithm_comparison.png" alt="Original & edited image comparison">
+        <img src="../../images/opencv_fundamentals/part_4/grabcut_algorithm_comparison.png" alt="Original & edited image comparison">
     </div>
 </div>
 
@@ -271,7 +271,7 @@ create_mpl_figure(30, 10, images, ["Original", "Background Component", "Backgrou
 
 <div style="display: flex; justify-content: space-around;">
     <div>
-        <img src="../images/part_4/connected_components_labeling_comparison.png" alt="Original & edited image comparison">
+        <img src="../../images/opencv_fundamentals/part_4/connected_components_labeling_comparison.png" alt="Original & edited image comparison">
     </div>
 </div>
 
@@ -367,7 +367,7 @@ plt.show()
 
 <div style="display: flex; justify-content: space-around;">
     <div>
-        <img src="../images/part_4/watershed_algorithm_comparison.png" alt="Original & edited image comparison">
+        <img src="../../images/opencv_fundamentals/part_4/watershed_algorithm_comparison.png" alt="Original & edited image comparison">
     </div>
 </div>
 

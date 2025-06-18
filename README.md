@@ -2,25 +2,13 @@
 
 ## Overview
 
-This blog series covers a variety of different image manipulation techniques contained within the opencv-python library.
+This repo contains a variety of resources, from blogs on the fundamental image manipulation techniques of OpenCV, to a variety of different projects putting these techniques into practice.
 
-## Usage
+Each blog series will contain multiple parts both contained in markdown for easy reading on github, and also in google colab notebooks so that the user can experiment with each technique as it comes up.
 
-This repo contains three different formats of the same blog series. These three formats, markdown, .ipynb on github, and .ipynb on Google Colab are identical in terms of content, but the notebooks allow the reader to experiment with the various techniques themselves, whereas the markdown is good for those who would rather just read the content.
+Each blog series is contained in directories of identical names in the blog and notebooks directories. For instace, for the OpenCV Fundamentals series, you will find the markdown in blog/opencv_fundamentals, and the notebooks in notebooks/opencv_fundamentals.
 
-## Google Colab Links
-
-Part 1: https://colab.research.google.com/drive/1LFmv21T7OTrBzm3PyGWtuMcPMcTpNeFD?usp=sharing
-
-Part 2: https://colab.research.google.com/drive/1k2CZisZoOahASrXNka1tIaDfgXoI2wQt?usp=sharing
-
-Part 3:https://colab.research.google.com/drive/1j-Lb7rbZDNeMdyD0umyAlbZJYhTsFPZS?usp=sharing
-
-Part 4:https://colab.research.google.com/drive/1NaME41cwexk0r00v_k3eUziMeeFGeWpg?usp=sharing
-
-Part 5:https://colab.research.google.com/drive/1yA9ilzuOPu9MfCD0ORQRyCeaU8335DVu?usp=sharing
-
-Part 6:https://colab.research.google.com/drive/1KGmlsrXZndcYGxd2N0ZAMiqv6t9-auh0?usp=sharing
+In both the markdown and notebook parent directory for each blog series, you will find READMEs specifically related to each blog in the related directories. In relation to the opencv fundamentals series, the READMEs are located as follows: blog/opencv_fundamentals/README.md & notebooks/opencv_fundamentals/README.md.
 
 ## Technologies Used
 
