@@ -62,7 +62,7 @@ Face Detection is an exceedingly common method in computer vision that is used f
 
 ### Importing the Sample Images & Color Conversions
 
-Like in the blog fundamentals series, in this first section, we are decoding the sample image from our github repo, converting it into the RGB format for display, as well as into grayscale, so that it can be properly processed by the model.
+Like in the OpenCV fundamentals series, in this first section, we are decoding the sample image from our github repo, converting it into the RGB format for display, as well as into grayscale, so that it can be properly processed by the model.
 
 ```
 # Decode the sample images
