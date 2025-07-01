@@ -119,7 +119,7 @@ detect_eyes_mult = eyes_face_cascade.detectMultiScale(faces_gray, scaleFactor = 
 
 ### Draw Bounding Boxes
 
-As the subtitle above suggests, now that we have processed the images through the model, we will now be drawing rectangles (pay attention to color!) around the detected areas within the images.
+As the subtitle above suggests, now that we have processed the images through the model, we will now be drawing rectangles around the detected areas within the images.
 
 - Green = Face
 - Red = Profile
