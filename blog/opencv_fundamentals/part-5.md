@@ -18,11 +18,11 @@ from PIL import Image
 
 ```
 # Collecting the sample image
-image_url = "https://raw.githubusercontent.com/SoftwareSushi/marketing-resources/main/images/opencv_blog/part_5/Parrot_underwater.png"
+image_url = "https://raw.githubusercontent.com/SoftwareSushi/marketing-resources/main/images/opencv/fundamentals/part_5/Parrot_underwater.png"
 resp = urllib.request.urlopen(image_url)
 image_bytes = np.asarray(bytearray(resp.read()), dtype=np.uint8)
 
-image_url_2 = "https://raw.githubusercontent.com/SoftwareSushi/marketing-resources/main/images/opencv_blog/part_5/Parrots_contours.png"
+image_url_2 = "https://raw.githubusercontent.com/SoftwareSushi/marketing-resources/main/images/opencv/fundamentals/part_5/Parrots_contours.png"
 resp_2 = urllib.request.urlopen(image_url_2)
 image_bytes_2 = np.asarray(bytearray(resp_2.read()), dtype=np.uint8)
 ```

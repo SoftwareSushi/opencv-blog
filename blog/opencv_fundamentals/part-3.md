@@ -13,7 +13,7 @@ import matplotlib.pyplot as plt
 
 ```
 # Collecting the sample image
-image_url = "https://raw.githubusercontent.com/SoftwareSushi/marketing-resources/main/images/opencv_blog/part_3/Parrot_in_space.png"
+image_url = "https://raw.githubusercontent.com/SoftwareSushi/marketing-resources/main/images/opencv/fundamentals/part_3/Parrot_in_space.png"
 resp = urllib.request.urlopen(image_url)
 image_bytes = np.asarray(bytearray(resp.read()), dtype=np.uint8)
 ```

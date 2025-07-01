@@ -13,19 +13,19 @@ import matplotlib.pyplot as plt
 
 ```
 # Collecting the sample images
-image_url = "https://raw.githubusercontent.com/SoftwareSushi/marketing-resources/main/images/opencv_blog/part_2/Parrot-on-pirate-ship.png"
+image_url = "https://raw.githubusercontent.com/SoftwareSushi/marketing-resources/main/images/opencv/fundamentals/part_2/Parrot-on-pirate-ship.png"
 resp = urllib.request.urlopen(image_url)
 image_bytes = np.asarray(bytearray(resp.read()), dtype=np.uint8)
 
-image_url_2 = "https://raw.githubusercontent.com/SoftwareSushi/marketing-resources/main/images/opencv_blog/part_1/Parrot-on-branch.png"
+image_url_2 = "https://raw.githubusercontent.com/SoftwareSushi/marketing-resources/main/images/opencv/fundamentals/part_1/Parrot-on-branch.png"
 resp_2 = urllib.request.urlopen(image_url_2)
 image_bytes_2 = np.asarray(bytearray(resp_2.read()), dtype=np.uint8)
 
-image_url_3 = "https://raw.githubusercontent.com/SoftwareSushi/marketing-resources/main/images/opencv_blog/part_2/bitwise_parrot.png"
+image_url_3 = "https://raw.githubusercontent.com/SoftwareSushi/marketing-resources/main/images/opencv/fundamentals/part_2/bitwise_parrot.png"
 resp_3 = urllib.request.urlopen(image_url_3)
 image_bytes_3 = np.asarray(bytearray(resp_3.read()), dtype=np.uint8)
 
-image_url_4 = "https://raw.githubusercontent.com/SoftwareSushi/marketing-resources/main/images/opencv_blog/part_2/bitwise_comparisons.png"
+image_url_4 = "https://raw.githubusercontent.com/SoftwareSushi/marketing-resources/main/images/opencv/fundamentals/part_2/bitwise_comparisons.png"
 resp_4 = urllib.request.urlopen(image_url_4)
 image_bytes_4 = np.asarray(bytearray(resp_4.read()), dtype=np.uint8)
 ```

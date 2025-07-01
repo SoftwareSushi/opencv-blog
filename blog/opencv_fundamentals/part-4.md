@@ -13,15 +13,15 @@ import matplotlib.pyplot as plt
 
 ```
 # Collecting the sample image
-image_url = "https://raw.githubusercontent.com/SoftwareSushi/marketing-resources/main/images/opencv_blog/part_4/Parrot_on_snowmobile.png"
+image_url = "https://raw.githubusercontent.com/SoftwareSushi/marketing-resources/main/images/opencv/fundamentals/part_4/Parrot_on_snowmobile.png"
 resp = urllib.request.urlopen(image_url)
 image_bytes = np.asarray(bytearray(resp.read()), dtype=np.uint8)
 
-image_url_watershed = "https://raw.githubusercontent.com/SoftwareSushi/marketing-resources/main/images/opencv_blog/part_4/Watershed_sample.png"
+image_url_watershed = "https://raw.githubusercontent.com/SoftwareSushi/marketing-resources/main/images/opencv/fundamentals/part_4/Parrots_watershed.png"
 resp = urllib.request.urlopen(image_url_watershed)
 image_bytes_watershed = np.asarray(bytearray(resp.read()), dtype=np.uint8)
 
-image_url_ccl = "https://raw.githubusercontent.com/SoftwareSushi/marketing-resources/main/images/opencv_blog/part_4/Parrot_simple.png"
+image_url_ccl = "https://raw.githubusercontent.com/SoftwareSushi/marketing-resources/main/images/opencv/fundamentals/part_4/Parrot_simple.png"
 resp = urllib.request.urlopen(image_url_ccl)
 image_bytes_ccl = np.asarray(bytearray(resp.read()), dtype=np.uint8)
 ```
