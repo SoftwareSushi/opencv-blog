@@ -83,7 +83,7 @@ faces_gray = cv2.cvtColor(faces_edit, cv2.COLOR_RGB2GRAY)
 
 ### Preparing the Face Detector & Running the Model
 
-In the second section, we initialize and process our images using the HCC. As is demonstrated below as well, this model has a few different things it can detect in addition to a person's face. In this case we are going to be looking for frontal faces in green, profiles in red, and eyes in blue.
+In the second section, we initialize and process our images using the HCC. As is demonstrated below as well, this model has a few different things it can detect in addition to a person's face. In this case we are going to be looking for frontal faces in green and eyes in blue.
 
 In each instance where we process our images, we are passing two arguments, scaleFactor, and minNeighbors.
 
@@ -95,21 +95,12 @@ minNeighbors is concerned with detection confidence. For each supposed face dete
 # Load the Haar cascade face detector
 frontal_face_cascade = cv2.CascadeClassifier(cv2.data.haarcascades + 'haarcascade_frontalface_default.xml')
 
-profile_face_cascade = cv2.CascadeClassifier(cv2.data.haarcascades + 'haarcascade_profileface.xml')
-
 eyes_face_cascade = cv2.CascadeClassifier(cv2.data.haarcascades + 'haarcascade_eye.xml')
-
-smile_face_cascade = cv2.CascadeClassifier(cv2.data.haarcascades + 'haarcascade_smile.xml')
 
 # Detect faces
 detect_face = frontal_face_cascade.detectMultiScale(face_gray, scaleFactor=1.2, minNeighbors=6)
 
 detect_faces = frontal_face_cascade.detectMultiScale(faces_gray, scaleFactor=1.2, minNeighbors=6)
-
-# Detect profiles (if present)
-detect_profile = profile_face_cascade.detectMultiScale(face_gray, scaleFactor = 1.2, minNeighbors=6)
-
-detect_profiles = profile_face_cascade.detectMultiScale(faces_gray, scaleFactor = 1.2, minNeighbors=6)
 
 # Detect eyes
 detect_eyes = eyes_face_cascade.detectMultiScale(face_gray, scaleFactor = 1.2, minNeighbors=50)
@@ -122,7 +113,6 @@ detect_eyes_mult = eyes_face_cascade.detectMultiScale(faces_gray, scaleFactor = 
 As the subtitle above suggests, now that we have processed the images through the model, we will now be drawing rectangles around the detected areas within the images.
 
 - Green = Face
-- Red = Profile
 - Blue = Eyes
 
 ```
@@ -132,13 +122,6 @@ for (x, y, w, h) in detect_face:
 
 for (x, y, w, h) in detect_faces:
     cv2.rectangle(faces_edit, (x, y), (x + w, y + h), (0, 255, 0), 1)
-
-# Draw rectangles around detected profiles
-for (x, y, w, h) in detect_profile:
-    cv2.rectangle(face_edit, (x, y), (x + w, y + h), (255, 0, 0), 10)
-
-for (x, y, w, h) in detect_profiles:
-    cv2.rectangle(faces_edit, (x, y), (x + w, y + h), (255, 0, 0), 1)
 
 # Draw rectangles around detected eyes
 for (x, y, w, h) in detect_eyes:
