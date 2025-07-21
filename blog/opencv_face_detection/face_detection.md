@@ -148,4 +148,4 @@ create_mpl_figure(30,10, [faces, faces_edit], ["Original", "Multiple Face Detect
 
 ## Conclusion
 
-That is how you do basic face detection using OpenCV! Using the Haar Cascade Classifier is relatively simple to use and very fast (enabling it to be used in real time!). It is a tremendously useful model, which we will be adding on to in the next blog, when the Haar cascade serves as the first step in our pre-processing for facial recognition.
+That is how you do basic face detection using OpenCV! Using the Haar Cascade Classifier is relatively simple to use and very fast (enabling it to be used in real time!). In the next blog, we will be covering facial recognition.
